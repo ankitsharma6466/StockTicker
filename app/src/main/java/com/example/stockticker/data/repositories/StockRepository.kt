@@ -26,6 +26,7 @@ class StockRepository @Inject constructor(private val stockDataService: StockDat
                     when {
                         (it.metaData != null && it.stockDetailItems != null) -> {
                             val deducedStockDetailsDTO = DataParsingUtil.getDeducedInfo(it.stockDetailItems!!)
+                            deducedStockDetailsDTO.symbol = it.metaData!!.symbol
                             DataWrapper(data = deducedStockDetailsDTO)
                         }
                         (it.infoMessage != null) -> DataWrapper(isError = true, errorMessage = it.infoMessage!!)

@@ -8,5 +8,6 @@ class DeducedStockDetailsDTO {
     lateinit var current: String
     lateinit var open: String
     lateinit var volume: String
+    lateinit var symbol: String
     lateinit var graphicalInfo: List<Entry>
 }

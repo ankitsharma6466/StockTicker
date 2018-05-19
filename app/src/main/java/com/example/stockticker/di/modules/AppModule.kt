@@ -1,4 +1,3 @@
-package com.ankitsharma.androidkotlinboilerplate.di.modules
 
 import android.app.Application
 import android.content.Context

@@ -1,5 +1,3 @@
-package com.ankitsharma.androidkotlinboilerplate.di.modules
-
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +40,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(okhttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://api.github.com")
+                .baseUrl("https://www.alphavantage.co")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .client(okhttpClient)

@@ -1,5 +1,4 @@
-package com.ankitsharma.androidkotlinboilerplate.di.modules
-
+import com.example.stockticker.data.services.StockDataService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -13,7 +12,7 @@ import javax.inject.Singleton
 @Module(includes = arrayOf(NetworkModule::class))
 class NetworkServiceModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideGithubService(retrofit: Retrofit): GithubService = retrofit.create(GithubService::class.java)
+    @Provides
+    @Singleton
+    fun provideGithubService(retrofit: Retrofit): StockDataService = retrofit.create(StockDataService::class.java)
 }

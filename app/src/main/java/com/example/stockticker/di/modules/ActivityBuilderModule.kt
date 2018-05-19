@@ -1,6 +1,6 @@
-package com.ankitsharma.androidkotlinboilerplate.di.modules
-
+import com.example.stockticker.views.stockDetails.StockDetailsActivity
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * Contains all activities to be bound to application dependency graph
@@ -10,7 +10,6 @@ import dagger.Module
 @Module
 abstract class ActivityBuilderModule {
 
-//    @ActivityScope
-//    @ContributesAndroidInjector(modules = arrayOf(MainActivityModule::class))
-//    abstract fun bindMainActivity(): MainActivity
+    @ContributesAndroidInjector()
+    abstract fun bindStockDetailsActivity(): StockDetailsActivity
 }

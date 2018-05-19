@@ -26,17 +26,17 @@ class StockRepository @Inject constructor(private val stockDataService: StockDat
                     when {
                         (it.metaData != null && it.stockDetailItems != null) -> {
                             val deducedStockDetailsDTO = DataParsingUtil.getDeducedInfo(it.stockDetailItems!!)
-                            DataWrapper(deducedStockDetailsDTO, null)
+                            DataWrapper(data = deducedStockDetailsDTO)
                         }
-                        (it.infoMessage != null) -> DataWrapper(null, it.infoMessage)
-                        (it.errorMessage != null) -> DataWrapper(null, it.errorMessage)
-                        else -> DataWrapper(null, Constants.ERROR_MESSAGE)
+                        (it.infoMessage != null) -> DataWrapper(isError = true, errorMessage = it.infoMessage!!)
+                        (it.errorMessage != null) -> DataWrapper(isError = true, errorMessage = it.errorMessage!!)
+                        else -> DataWrapper(isError = true)
                     }
                 }
                 .subscribe({
-                    stockInfoLiveData.value = it as DataWrapper<DeducedStockDetailsDTO>?
+                    stockInfoLiveData.value = it
                 }, {
-                    stockInfoLiveData.value = DataWrapper(null, it.message)
+                    stockInfoLiveData.value = DataWrapper(isError = true, errorMessage = it.message!!)
                 })
 
         return stockInfoLiveData

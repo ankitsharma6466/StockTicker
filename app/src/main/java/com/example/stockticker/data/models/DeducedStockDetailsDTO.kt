@@ -1,6 +1,7 @@
 package com.example.stockticker.data.models
 
 import java.util.*
+import kotlin.collections.LinkedHashMap
 
 class DeducedStockDetailsDTO {
     lateinit var highest: String
@@ -9,5 +10,5 @@ class DeducedStockDetailsDTO {
     lateinit var open: String
     lateinit var volume: String
     lateinit var calendar: Calendar
-    lateinit var graphicalInfo: HashMap<String, Float>
+    lateinit var graphicalInfo: LinkedHashMap<String, Float>
 }

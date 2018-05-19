@@ -2,8 +2,10 @@ package com.example.stockticker.common
 
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
 import com.example.stockticker.data.models.StockIntradayItemDTO
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.LinkedHashMap
 
 object DataParsingUtil {
 
@@ -13,6 +15,11 @@ object DataParsingUtil {
         var isFirst = true
         var highest = 0F
         var lowest = 0F
+        var marketTimings = StockMarketHelper.getMarketTimings()
+        deducedStockDetailsDTO.graphicalInfo = LinkedHashMap()
+
+        Timber.d("open time     ${marketTimings.openTime}")
+        Timber.d("close time     ${marketTimings.closeTime}")
 
         for((key, value) in stockDetailItems) {
 
@@ -24,11 +31,12 @@ object DataParsingUtil {
             val calendar = Calendar.getInstance()
             calendar.time = date
 
+            Timber.d("current item >> $date")
+
             //this gets us the current value from first object
             //fetch current value and volume for the stock
             if(isFirst){
                 deducedStockDetailsDTO.current = "${value.open}"
-                deducedStockDetailsDTO.calendar = calendar
                 deducedStockDetailsDTO.volume = "${value.volume}"
                 deducedStockDetailsDTO.lowest = "${value.low}"
                 lowest = value.low
@@ -39,9 +47,13 @@ object DataParsingUtil {
 
             if(lowest > value.low) lowest = value.low
 
-            if(deducedStockDetailsDTO.calendar.get(Calendar.DATE) != calendar.get(Calendar.DATE)) {
-                deducedStockDetailsDTO.open = "${value.open}"
+            //prepare graph data
+            var key = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
+            deducedStockDetailsDTO.graphicalInfo[key] = value.open
 
+            deducedStockDetailsDTO.open = "${value.open}"
+
+            if(calendar.timeInMillis < marketTimings.openTime) {
                 //break the loop here as we reached last value for the day
                 break
             }

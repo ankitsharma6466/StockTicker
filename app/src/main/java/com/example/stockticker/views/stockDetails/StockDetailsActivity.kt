@@ -16,7 +16,6 @@ class StockDetailsActivity : BaseActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var dataBinding: ActivityStockDetailsBinding
     lateinit var stockViewModel: StockViewModel
-    var loading: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +37,11 @@ class StockDetailsActivity : BaseActivity() {
 
             stockViewModel.setLoader(false)
 
-            if(it?.errorMessage != null) {
+            if(it!!.isError) {
                 //show error message
-                stockViewModel.setErrorMessage(it.errorMessage!!)
+                stockViewModel.setErrorMessage(it.errorMessage)
             } else {
-                stockViewModel.setDeducedStockDetailsDTO(it?.data!!)
+                stockViewModel.setDeducedStockDetailsDTO(it.data!!)
             }
         })
     }

@@ -11,6 +11,9 @@ import kotlin.collections.LinkedHashMap
 
 object DataParsingUtil {
 
+    /**
+     * Converts the stock market list data to cumulative information
+     */
     fun getDeducedInfo(stockDetailItems: Map<String, StockIntradayItemDTO>): DeducedStockDetailsDTO {
 
         val deducedStockDetailsDTO = DeducedStockDetailsDTO()
@@ -24,7 +27,7 @@ object DataParsingUtil {
         for((key, value) in stockDetailItems) {
 
             val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
-            dateFormatter.timeZone = TimeZone.getTimeZone("America/New_York")
+            dateFormatter.timeZone = TimeZone.getTimeZone(Constants.EST_TIMEZONE)
 
             //we have date
             val date = dateFormatter.parse(key)
@@ -32,7 +35,7 @@ object DataParsingUtil {
             calendar.time = date
 
             //this gets us the current value from first object
-            //fetch current value and volume for the stock
+            //fetch latest/current value and volume for the stock
             if(isFirst){
                 deducedStockDetailsDTO.current = "${value.open}"
                 deducedStockDetailsDTO.volume = "${value.volume}"
@@ -63,10 +66,12 @@ object DataParsingUtil {
         return deducedStockDetailsDTO
     }
 
-    fun getFormattedChartData(entries: List<Float>): List<Entry> {
+    /**
+     * Converts the price list into required chart format
+     */
+    private fun getFormattedChartData(entries: List<Float>): List<Entry> {
 
-        var finalData: ArrayList<Entry> = ArrayList()
-//        var reverseList = entries.reversed()
+        val finalData: ArrayList<Entry> = ArrayList()
 
         var index = entries.size-1
         for(data in entries) {

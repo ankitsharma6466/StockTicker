@@ -5,12 +5,15 @@ import java.util.*
 
 object StockMarketHelper {
 
+    /**
+     * returns the market timings - start and close as 'MarketTimings'
+     */
     fun getMarketTimings(): MarketTimings {
 
         var marketTimings = MarketTimings()
 
         var calendar = Calendar.getInstance()
-        calendar.timeZone = TimeZone.getTimeZone("America/New_York")
+        calendar.timeZone = TimeZone.getTimeZone(Constants.EST_TIMEZONE)
         calendar.add(Calendar.DATE, -1)
         calendar.set(Calendar.HOUR_OF_DAY, 9)
         calendar.set(Calendar.MINUTE, 30)

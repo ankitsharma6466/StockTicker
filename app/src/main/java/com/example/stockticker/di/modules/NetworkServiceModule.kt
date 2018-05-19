@@ -1,3 +1,5 @@
+package com.example.stockticker.di.modules
+
 import com.example.stockticker.data.services.StockDataService
 import dagger.Module
 import dagger.Provides

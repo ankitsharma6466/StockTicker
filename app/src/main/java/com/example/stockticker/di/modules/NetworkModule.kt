@@ -1,3 +1,5 @@
+package com.example.stockticker.di.modules
+
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers

@@ -1,5 +1,5 @@
 package com.example.stockticker.common
 
-import dagger.android.DaggerActivity
+import dagger.android.support.DaggerAppCompatActivity
 
-open class BaseActivity: DaggerActivity()
+open class BaseActivity: DaggerAppCompatActivity()

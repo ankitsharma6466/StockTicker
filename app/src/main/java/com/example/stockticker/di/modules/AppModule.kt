@@ -1,3 +1,4 @@
+package com.example.stockticker.di.modules
 
 import android.app.Application
 import android.content.Context

@@ -1,5 +1,6 @@
 package com.example.stockticker
 
+import com.example.stockticker.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber

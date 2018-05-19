@@ -1,4 +1,4 @@
-package com.ankitsharma.androidkotlinboilerplate.di.annotations
+package com.example.stockticker.di.annotations
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

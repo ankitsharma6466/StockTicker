@@ -1,3 +1,5 @@
+package com.example.stockticker.di.modules
+
 import com.example.stockticker.views.stockDetails.StockDetailsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -10,6 +12,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector()
-    abstract fun bindStockDetailsActivity(): StockDetailsActivity
+    @ContributesAndroidInjector
+    internal abstract fun bindStockDetailsActivity(): StockDetailsActivity
 }

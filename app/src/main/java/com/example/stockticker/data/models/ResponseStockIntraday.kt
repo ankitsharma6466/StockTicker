@@ -7,6 +7,6 @@ class ResponseStockIntraday: BaseResponse() {
     @SerializedName("Meta Data")
     var metaData: StockIntradayMetaDataDTO? = null
 
-    @SerializedName("Time Series (15min)")
+    @SerializedName("Time Series (5min)")
     var stockDetailItems: Map<String, StockIntradayItemDTO>? = null
 }

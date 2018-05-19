@@ -1,14 +1,13 @@
 package com.example.stockticker.data.models
 
-import com.example.stockticker.common.Constants
 import com.google.gson.annotations.SerializedName
 
 open class BaseResponse {
 
     @SerializedName("Error Message")
-    var errorMessage: String = Constants.ERROR_MESSAGE
+    var errorMessage: String? = null
 
     @SerializedName("Information")
-    var infoMessage: String = Constants.ERROR_MESSAGE
+    var infoMessage: String? = null
 
 }

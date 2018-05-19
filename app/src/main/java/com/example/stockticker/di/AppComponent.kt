@@ -1,7 +1,9 @@
-import com.ankitsharma.androidkotlinboilerplate.di.modules.ActivityBuilderModule
-import com.ankitsharma.androidkotlinboilerplate.di.modules.AppModule
-import com.ankitsharma.androidkotlinboilerplate.di.modules.ViewModelModule
+package com.example.stockticker.di
+
 import com.example.stockticker.MyApplication
+import com.example.stockticker.di.modules.ActivityBuilderModule
+import com.example.stockticker.di.modules.AppModule
+import com.example.stockticker.di.modules.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule

@@ -8,6 +8,9 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.example.stockticker"
         minSdkVersion 21
@@ -42,6 +45,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kapt 'com.android.databinding:compiler:3.1.2'
 
     //Test
     testImplementation 'junit:junit:4.12'
@@ -76,11 +80,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
     //dagger
-    implementation 'com.google.dagger:dagger:2.13'
-    implementation 'com.google.dagger:dagger-android:2.13'
-    implementation 'com.google.dagger:dagger-android-support:2.13'
-    kapt 'com.google.dagger:dagger-compiler:2.13'
-    kapt 'com.google.dagger:dagger-android-processor:2.13'
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    kapt 'com.google.dagger:dagger-compiler:2.15'
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
 
     //logger
     implementation 'com.jakewharton.timber:timber:4.6.0'

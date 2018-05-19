@@ -34,9 +34,9 @@ class StockRepository @Inject constructor(private val stockDataService: StockDat
                     }
                 }
                 .subscribe({
-                    stockInfoLiveData.value = it
+                    stockInfoLiveData.postValue(it)
                 }, {
-                    stockInfoLiveData.value = DataWrapper(isError = true, errorMessage = it.message!!)
+                    stockInfoLiveData.postValue(DataWrapper(isError = true, errorMessage = it.message!!))
                 })
 
         return stockInfoLiveData

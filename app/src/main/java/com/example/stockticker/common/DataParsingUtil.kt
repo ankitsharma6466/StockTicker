@@ -2,24 +2,24 @@ package com.example.stockticker.common
 
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
 import com.example.stockticker.data.models.StockIntradayItemDTO
+import com.github.mikephil.charting.data.Entry
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 object DataParsingUtil {
 
     fun getDeducedInfo(stockDetailItems: Map<String, StockIntradayItemDTO>): DeducedStockDetailsDTO {
 
-        var deducedStockDetailsDTO = DeducedStockDetailsDTO()
+        val deducedStockDetailsDTO = DeducedStockDetailsDTO()
         var isFirst = true
         var highest = 0F
         var lowest = 0F
-        var marketTimings = StockMarketHelper.getMarketTimings()
-        deducedStockDetailsDTO.graphicalInfo = LinkedHashMap()
+        val marketTimings = StockMarketHelper.getMarketTimings()
+        val entryList: ArrayList<Float> = ArrayList()
 
-        Timber.d("open time     ${marketTimings.openTime}")
-        Timber.d("close time     ${marketTimings.closeTime}")
 
         for((key, value) in stockDetailItems) {
 
@@ -30,8 +30,6 @@ object DataParsingUtil {
             val date = dateFormatter.parse(key)
             val calendar = Calendar.getInstance()
             calendar.time = date
-
-            Timber.d("current item >> $date")
 
             //this gets us the current value from first object
             //fetch current value and volume for the stock
@@ -48,8 +46,7 @@ object DataParsingUtil {
             if(lowest > value.low) lowest = value.low
 
             //prepare graph data
-            var key = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
-            deducedStockDetailsDTO.graphicalInfo[key] = value.open
+            entryList.add(value.open)
 
             deducedStockDetailsDTO.open = "${value.open}"
 
@@ -61,7 +58,22 @@ object DataParsingUtil {
 
         deducedStockDetailsDTO.highest = "$highest"
         deducedStockDetailsDTO.lowest = "$lowest"
+        deducedStockDetailsDTO.graphicalInfo = getFormattedChartData(entryList)
 
         return deducedStockDetailsDTO
+    }
+
+    fun getFormattedChartData(entries: List<Float>): List<Entry> {
+
+        var finalData: ArrayList<Entry> = ArrayList()
+//        var reverseList = entries.reversed()
+
+        var index = entries.size-1
+        for(data in entries) {
+            finalData.add(Entry(index.toFloat(), data))
+            index--
+        }
+
+        return finalData
     }
 }

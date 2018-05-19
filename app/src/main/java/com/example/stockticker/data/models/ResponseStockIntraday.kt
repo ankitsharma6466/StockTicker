@@ -1,5 +1,6 @@
 package com.example.stockticker.data.models
 
+import com.example.stockticker.common.BaseResponse
 import com.google.gson.annotations.SerializedName
 
 class ResponseStockIntraday: BaseResponse() {

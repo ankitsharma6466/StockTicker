@@ -1,4 +1,4 @@
-package com.example.stockticker.data.models
+package com.example.stockticker.common
 
 import com.google.gson.annotations.SerializedName
 
@@ -9,5 +9,4 @@ open class BaseResponse {
 
     @SerializedName("Information")
     var infoMessage: String? = null
-
 }

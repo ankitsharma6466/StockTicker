@@ -3,5 +3,7 @@
     <string name="label_high">High</string>
     <string name="label_low">Low</string>
     <string name="label_volume">Volume</string>
-    <string name="currency">USD</string>
+    <string name="label_current_symbol">Current Symbol</string>
+    <string name="hint_symbol">eg: GOOG, MSFT</string>
+    <string name="btn_set_default">SET AS DEFAULT</string>
 </resources>

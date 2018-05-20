@@ -3,12 +3,18 @@ package com.example.stockticker.views.stockDetails
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.example.stockticker.R
 import com.example.stockticker.common.BaseActivity
+import com.example.stockticker.data.events.SymbolChangedEvent
 import com.example.stockticker.databinding.ActivityStockDetailsBinding
+import com.example.stockticker.views.settings.SettingsActivity
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -16,6 +22,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.activity_stock_details.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import timber.log.Timber
 import javax.inject.Inject
 
 class StockDetailsActivity : BaseActivity() {
@@ -100,5 +110,42 @@ class StockDetailsActivity : BaseActivity() {
             chartView.data = lineData
             chartView.invalidate()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater = MenuInflater(this)
+        inflater.inflate(R.menu.home_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        if(item?.itemId == R.id.menu_settings) {
+            gotoSettings()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun gotoSettings() {
+        var settingsIntent = Intent(this, SettingsActivity::class.java)
+        startActivity(settingsIntent)
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onSymbolChange(event: SymbolChangedEvent) {
+        EventBus.getDefault().removeStickyEvent(event)
+        stockViewModel.loadStockInfo()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 }

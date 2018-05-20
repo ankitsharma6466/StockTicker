@@ -25,11 +25,13 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.gms.gcm.GcmNetworkManager
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_stock_details.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class StockDetailsActivity : BaseActivity() {
@@ -57,6 +59,22 @@ class StockDetailsActivity : BaseActivity() {
         subscribeToModel()
 
         stockDataSyncHelper.schedule()
+
+        startMonitoring()
+    }
+
+    fun startMonitoring() {
+
+        getCompositeDisposable().add(
+                Observable
+                        .interval(5, 10, TimeUnit.MINUTES)
+                        .subscribe({
+                            stockViewModel.loadStockInfo()
+                            subscribeToModel()
+                        }, {
+                            Timber.e(it)
+                        })
+        )
     }
 
     fun setupChart() {

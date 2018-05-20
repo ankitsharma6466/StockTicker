@@ -18,6 +18,7 @@ open class BaseActivity: DaggerAppCompatActivity() {
     }
 
     override fun onDestroy() {
+        compositeDisposable.dispose()
         super.onDestroy()
     }
 }

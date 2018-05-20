@@ -7,5 +7,6 @@ class Constants {
         const val EST_TIMEZONE: String = "America/New_York"
         const val CURRENT_SYMBOL: String = "CurrentSymbol"
         const val DEFAULT_SYMBOL: String = "GOOG"
+        const val TAG_STOCK_SYNC_SERVICE: String = "TAG_STOCK_SYNC_SERVICE"
     }
 }

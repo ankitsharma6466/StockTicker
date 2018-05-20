@@ -42,4 +42,15 @@ object StockMarketHelper {
 
         return "Last Updated $str"
     }
+
+    fun getFutureMarketOpenTime(): Long {
+        var calendar = Calendar.getInstance()
+        calendar.timeZone = TimeZone.getTimeZone(Constants.EST_TIMEZONE)
+        calendar.add(Calendar.DATE, 1)
+        calendar.set(Calendar.HOUR_OF_DAY, 9)
+        calendar.set(Calendar.MINUTE, 30)
+        calendar.set(Calendar.SECOND, 0)
+
+        return calendar.timeInMillis
+    }
 }

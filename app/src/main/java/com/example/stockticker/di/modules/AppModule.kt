@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.stockticker.MyApplication
 import com.example.stockticker.data.db.StockDetailsDatabase
+import com.google.android.gms.gcm.GcmNetworkManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -31,4 +32,8 @@ class AppModule {
         return application.getSharedPreferences("STOCK_PREF", Context.MODE_PRIVATE)
     }
 
+    @Provides
+    fun providesGcmNetworkManager(application: MyApplication): GcmNetworkManager {
+        return GcmNetworkManager.getInstance(application)
+    }
 }

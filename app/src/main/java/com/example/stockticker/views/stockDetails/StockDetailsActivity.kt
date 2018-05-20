@@ -13,6 +13,7 @@ import android.view.MenuItem
 import com.example.stockticker.R
 import com.example.stockticker.common.BaseActivity
 import com.example.stockticker.common.DataWrapper
+import com.example.stockticker.common.StockDataSyncHelper
 import com.example.stockticker.data.events.SymbolChangedEvent
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
 import com.example.stockticker.databinding.ActivityStockDetailsBinding
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.gms.gcm.GcmNetworkManager
 import kotlinx.android.synthetic.main.activity_stock_details.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -34,6 +36,10 @@ class StockDetailsActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var stockDataSyncHelper: StockDataSyncHelper
+
     lateinit var dataBinding: ActivityStockDetailsBinding
     lateinit var stockViewModel: StockViewModel
 
@@ -49,6 +55,8 @@ class StockDetailsActivity : BaseActivity() {
 
         stockViewModel.loadStockInfo()
         subscribeToModel()
+
+        stockDataSyncHelper.schedule()
     }
 
     fun setupChart() {

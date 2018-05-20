@@ -3,6 +3,7 @@ package com.example.stockticker.di
 import com.example.stockticker.MyApplication
 import com.example.stockticker.di.modules.ActivityBuilderModule
 import com.example.stockticker.di.modules.AppModule
+import com.example.stockticker.di.modules.ServiceBuilderModule
 import com.example.stockticker.di.modules.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -18,7 +19,8 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AndroidSupportInjectionModule::class,
         AppModule::class,
         ViewModelModule::class,
-        ActivityBuilderModule::class))
+        ActivityBuilderModule::class,
+        ServiceBuilderModule::class))
 interface AppComponent: AndroidInjector<MyApplication> {
 
     @Component.Builder

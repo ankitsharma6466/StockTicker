@@ -20,7 +20,7 @@ class StockViewModel @Inject constructor(private val stockRepository: StockRepos
 
     fun loadStockInfo() {
         setLoader(true)
-        var symbol = pref.getString(Constants.CURRENT_SYMBOL, Constants.DEFAULT_SYMBOL)
+        val symbol = pref.getString(Constants.CURRENT_SYMBOL, Constants.DEFAULT_SYMBOL)
         stockDetailsObservable = stockRepository.getStockIntradayDetails(symbol)
     }
 

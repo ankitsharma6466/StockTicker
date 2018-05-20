@@ -12,7 +12,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.stockticker.R
 import com.example.stockticker.common.BaseActivity
+import com.example.stockticker.common.DataWrapper
 import com.example.stockticker.data.events.SymbolChangedEvent
+import com.example.stockticker.data.models.DeducedStockDetailsDTO
 import com.example.stockticker.databinding.ActivityStockDetailsBinding
 import com.example.stockticker.views.settings.SettingsActivity
 import com.github.mikephil.charting.components.Description
@@ -46,7 +48,6 @@ class StockDetailsActivity : BaseActivity() {
         dataBinding.stockViewModel = stockViewModel
 
         stockViewModel.loadStockInfo()
-
         subscribeToModel()
     }
 
@@ -78,7 +79,6 @@ class StockDetailsActivity : BaseActivity() {
     fun subscribeToModel() {
 
         stockViewModel.stockDetailsObservable.observe(this, Observer {
-
             stockViewModel.setLoader(false)
 
             if(it!!.isError) {
@@ -137,6 +137,7 @@ class StockDetailsActivity : BaseActivity() {
     fun onSymbolChange(event: SymbolChangedEvent) {
         EventBus.getDefault().removeStickyEvent(event)
         stockViewModel.loadStockInfo()
+        subscribeToModel()
     }
 
     override fun onStart() {

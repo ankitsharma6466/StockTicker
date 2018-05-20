@@ -40,8 +40,6 @@ object StockMarketHelper {
 
         val str = format.format(cal.time)
 
-        Timber.d("time >>>>>>>>>>>>>>>>>>>>>>>>>>> $str")
-
         return "Last Updated $str"
     }
 }

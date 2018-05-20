@@ -6,6 +6,7 @@
 
     <color name="textPrimary">#242424</color>
     <color name="textSecondary">#848484</color>
+    <color name="textError">#ab0303</color>
     <color name="textMenu">#ffffff</color>
 
     <color name="background">#ffffff</color>

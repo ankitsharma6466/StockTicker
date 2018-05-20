@@ -83,11 +83,12 @@ class StockDetailsActivity : BaseActivity() {
 
             if(it!!.isError) {
                 //show error message
-                stockViewModel.setErrorMessage(it.errorMessage)
+                stockViewModel.setErrorMessage(true, it.errorMessage)
             } else {
                 stockViewModel.setDeducedStockDetailsDTO(it.data!!)
                 stockViewModel.setLastUpdatedTimeStr(it.data!!.date)
                 updateChart(it.data!!.graphicalInfo)
+                stockViewModel.setErrorMessage(show = false)
             }
         })
     }

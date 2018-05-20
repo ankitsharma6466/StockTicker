@@ -4,10 +4,14 @@ import com.example.stockticker.data.services.StockSyncService
 import com.google.android.gms.gcm.GcmNetworkManager
 import com.google.android.gms.gcm.OneoffTask
 import com.google.android.gms.gcm.Task
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Provides Time bound Data syncing
+ *
+ * Created by ankitsharma on 20/05/18.
+ */
 class StockDataSyncHelper @Inject constructor(private val manager: GcmNetworkManager) {
 
     fun schedule() {
@@ -25,7 +29,7 @@ class StockDataSyncHelper @Inject constructor(private val manager: GcmNetworkMan
         manager.schedule(task)
     }
 
-    fun getNextExecutionTime(): Long {
+    private fun getNextExecutionTime(): Long {
 
         var cal = Calendar.getInstance()
 

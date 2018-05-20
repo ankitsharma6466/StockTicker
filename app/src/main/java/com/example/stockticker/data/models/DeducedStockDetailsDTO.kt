@@ -8,6 +8,9 @@ import com.github.mikephil.charting.data.Entry
 import io.reactivex.annotations.NonNull
 import java.util.*
 
+/**
+ * Created by ankitsharma on 19/05/18.
+ */
 @Entity(tableName = "StockDetails")
 class DeducedStockDetailsDTO {
 

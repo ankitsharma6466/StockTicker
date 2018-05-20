@@ -2,6 +2,9 @@ package com.example.stockticker.data.models
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Created by ankitsharma on 19/05/18.
+ */
 class StockIntradayItemDTO {
 
     @SerializedName("1. open")

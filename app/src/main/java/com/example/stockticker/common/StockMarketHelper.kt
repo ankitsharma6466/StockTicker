@@ -1,10 +1,14 @@
 package com.example.stockticker.common
 
 import com.example.stockticker.data.models.MarketTimings
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Provides helper methods corresponding to stock market
+ *
+ * Created by ankitsharma on 19/05/18.
+ */
 object StockMarketHelper {
 
     /**
@@ -32,6 +36,9 @@ object StockMarketHelper {
         return marketTimings
     }
 
+    /**
+     * returns last updated time string that is displayed on UI
+     */
     fun getLastUpdatedTimeStr(millis: Long): String {
         val format = SimpleDateFormat("dd MMM, HH:mm", Locale.ENGLISH)
 
@@ -43,6 +50,9 @@ object StockMarketHelper {
         return "Last Updated $str"
     }
 
+    /**
+     * Returns the next market open time wrt to current date
+     */
     fun getFutureMarketOpenTime(): Long {
         var calendar = Calendar.getInstance()
         calendar.timeZone = TimeZone.getTimeZone(Constants.EST_TIMEZONE)

@@ -3,6 +3,9 @@ package com.example.stockticker.common
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 
+/**
+ * Created by ankitsharma on 19/05/18.
+ */
 open class BaseViewModel: ViewModel() {
 
     val loader: ObservableField<Boolean> = ObservableField()

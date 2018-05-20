@@ -1,12 +1,16 @@
 package com.example.stockticker.data.services
 
-import android.arch.lifecycle.LiveData
 import com.example.stockticker.BuildConfig
 import com.example.stockticker.data.models.ResponseStockIntraday
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Provides methods for network bound resources
+ *
+ * Created by ankitsharma on 19/05/18.
+ */
 interface StockDataService {
 
     @GET("query?apikey=${BuildConfig.ALPHAVANTAGE_KEY}")

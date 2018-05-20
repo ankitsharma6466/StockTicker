@@ -2,20 +2,23 @@ package com.example.stockticker.data.repositories
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.example.stockticker.common.Constants
 import com.example.stockticker.common.DataParsingUtil
 import com.example.stockticker.common.DataWrapper
 import com.example.stockticker.data.db.StockDetailsDatabase
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
 import com.example.stockticker.data.services.StockDataService
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Repository wrapper for stock data
+ *
+ * Created by ankitsharma on 19/05/18.
+ */
 @Singleton
 class StockRepository @Inject constructor(private val stockDataService: StockDataService,
                                           private val stockDetailsDatabase: StockDetailsDatabase) {
@@ -40,7 +43,7 @@ class StockRepository @Inject constructor(private val stockDataService: StockDat
                     Timber.e(it)
                 })
 
-        //todo: also check for latest time to avoid iterations
+        //todo: to further optimize we can store all day values and only iterate over new values
         stockDataService.getDetails(symbol = symbol)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map {
@@ -70,6 +73,9 @@ class StockRepository @Inject constructor(private val stockDataService: StockDat
         return stockInfoLiveData
     }
 
+    /**
+     * Sync with database
+     */
     fun saveDetails(details: DeducedStockDetailsDTO) {
 
         Observable.just(details)

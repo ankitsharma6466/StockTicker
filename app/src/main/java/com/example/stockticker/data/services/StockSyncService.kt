@@ -10,6 +10,11 @@ import com.google.android.gms.gcm.TaskParams
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
+/**
+ * Service the will execute the next sync for current selected stock.
+ *
+ * Created by ankitsharma on 20/05/18.
+ */
 class StockSyncService: GcmTaskService() {
 
     @Inject

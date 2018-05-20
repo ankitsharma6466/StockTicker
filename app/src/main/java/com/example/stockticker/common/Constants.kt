@@ -1,5 +1,8 @@
 package com.example.stockticker.common
 
+/**
+ * Created by ankitsharma on 19/05/18.
+ */
 class Constants {
 
     companion object {

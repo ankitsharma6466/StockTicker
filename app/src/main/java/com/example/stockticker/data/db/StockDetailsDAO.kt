@@ -6,6 +6,9 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
 
+/**
+ * Created by ankitsharma on 20/05/18.
+ */
 @Dao
 interface StockDetailsDAO {
 

@@ -76,6 +76,7 @@ class StockDetailsActivity : BaseActivity() {
                 stockViewModel.setErrorMessage(it.errorMessage)
             } else {
                 stockViewModel.setDeducedStockDetailsDTO(it.data!!)
+                stockViewModel.setLastUpdatedTimeStr(it.data!!.date)
                 updateChart(it.data!!.graphicalInfo)
             }
         })
@@ -83,19 +84,21 @@ class StockDetailsActivity : BaseActivity() {
 
     fun updateChart(chartData: List<Entry>){
 
-        var data = chartData.reversed()
+        if(chartData.isNotEmpty()) {
+            var data = chartData.reversed()
 
-        var set = LineDataSet(data, "Price")
-        set.setDrawCircles(false)
-        set.setDrawValues(false)
-        set.setColor(Color.GRAY, 255)
-        set.lineWidth = 2F
+            var set = LineDataSet(data, "Price")
+            set.setDrawCircles(false)
+            set.setDrawValues(false)
+            set.setColor(Color.GRAY, 255)
+            set.lineWidth = 2F
 
-        var dataSets = ArrayList<ILineDataSet>()
-        dataSets.add(set)
-        var lineData = LineData(dataSets)
+            var dataSets = ArrayList<ILineDataSet>()
+            dataSets.add(set)
+            var lineData = LineData(dataSets)
 
-        chartView.data = lineData
-        chartView.invalidate()
+            chartView.data = lineData
+            chartView.invalidate()
+        }
     }
 }

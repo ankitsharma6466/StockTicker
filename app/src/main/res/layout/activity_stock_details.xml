@@ -6,6 +6,9 @@
     <data>
         <import type="android.view.View" />
         <variable
+            name="helper"
+            type="com.example.stockticker.common.StockMarketHelper"/>
+        <variable
             name="stockViewModel"
             type="com.example.stockticker.views.stockDetails.StockViewModel"/>
     </data>
@@ -60,12 +63,13 @@
             tools:text="GOOOG" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/lastUpdated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/currency"
             android:textColor="@color/textSecondary"
             android:textSize="12sp"
+            android:text="@{stockViewModel.lastUpdatedTimeStr}"
+            tools:text="Last updated 18 May 17:56"
             app:layout_constraintEnd_toEndOf="@+id/currentView"
             app:layout_constraintTop_toBottomOf="@+id/currentView" />
 
@@ -79,7 +83,7 @@
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/lastUpdated" />
 
         <TextView
             android:id="@+id/textView2"

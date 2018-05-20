@@ -1,6 +1,7 @@
 package com.example.stockticker.common
 
 import com.example.stockticker.data.models.DeducedStockDetailsDTO
+import com.example.stockticker.data.models.MarketTimings
 import com.example.stockticker.data.models.StockIntradayItemDTO
 import com.github.mikephil.charting.data.Entry
 import timber.log.Timber
@@ -20,8 +21,8 @@ object DataParsingUtil {
         var isFirst = true
         var highest = 0F
         var lowest = 0F
-        val marketTimings = StockMarketHelper.getMarketTimings()
         val entryList: ArrayList<Float> = ArrayList()
+        lateinit var marketTimings: MarketTimings
 
 
         for((key, value) in stockDetailItems) {
@@ -40,9 +41,12 @@ object DataParsingUtil {
                 deducedStockDetailsDTO.current = "${value.open}"
                 deducedStockDetailsDTO.volume = "${value.volume}"
                 deducedStockDetailsDTO.lowest = "${value.low}"
+                deducedStockDetailsDTO.date = calendar.timeInMillis
+                marketTimings = StockMarketHelper.getMarketTimings(calendar.get(Calendar.DATE))
                 lowest = value.low
                 isFirst = false
             }
+
 
             if(highest < value.high) highest = value.high
 

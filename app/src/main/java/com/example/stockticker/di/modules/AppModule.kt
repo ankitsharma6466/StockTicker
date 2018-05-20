@@ -1,10 +1,12 @@
 package com.example.stockticker.di.modules
 
-import android.app.Application
-import android.content.Context
+import android.arch.persistence.room.Room
+import com.example.stockticker.MyApplication
+import com.example.stockticker.data.db.StockDetailsDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
+
 
 /**
  * App level dependencies
@@ -13,7 +15,15 @@ import javax.inject.Singleton
 @Module(includes = arrayOf(NetworkServiceModule::class))
 class AppModule {
 
+//    @Provides
+//    @Singleton
+//    fun provideContext(application: MyApplication): MyApplication = application
+
     @Provides
     @Singleton
-    fun provideContext(application: Application): Context = application
+    fun provideDatabase(application: MyApplication): StockDetailsDatabase {
+        return Room
+                .databaseBuilder(application.applicationContext, StockDetailsDatabase::class.java, "StockDB")
+                .build()
+    }
 }

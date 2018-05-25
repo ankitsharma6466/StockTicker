@@ -9,7 +9,6 @@ Simple application that displays current stat for a particular stock.
 3) Stock can be changed from settings
 
 ## Basic architecture overview
-
 1) Complete app written in kotlin
 2) Based on MVVM architecture
 3) Uses Android Architecture components such as LiveData, ViewModel, Room, Lifecycles

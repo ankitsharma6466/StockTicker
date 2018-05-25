@@ -11,6 +11,7 @@ import timber.log.Timber
  * Created by ankitsharma on 19/05/18.
  */
 class MyApplication: DaggerApplication() {
+
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())

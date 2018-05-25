@@ -16,8 +16,7 @@ Simple application that displays current stat for a particular stock.
 
 ## Directory structure
 
-#### common
-Contains base classes, utility classes, helpers and factory methods
+#### common - Contains base classes, utility classes, helpers and factory methods
 
 #### data
         db - Database related files like DAO
@@ -26,10 +25,8 @@ Contains base classes, utility classes, helpers and factory methods
         repositories - Data source wrapper classes
         services - contains data providing and processing services
 
-#### di
-contains dependency injection setup files
+#### di - contains dependency injection setup files
         annotations - contains custom annotations
         modules - contains dependency providers and other abstraction modules
 
-#### views
-contains further packages and files respective to each view
+#### views - contains further packages and files respective to each view
